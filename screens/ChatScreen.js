@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, ImageBackground, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Button, ImageBackground, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Feather } from '@expo/vector-icons';
 
 import backgroundImage from '../assets/images/droplet.jpeg';
+import colors from '../constants/colors';
 
 const ChatScreen = props => {
     
@@ -15,11 +17,15 @@ const ChatScreen = props => {
             </ImageBackground>
 
             <View style={styles.inputContainer}>
-                <Button title='Image' />
+                <TouchableOpacity onPress={() => console.log("Pressed!")}>
+                    <Feather name="plus" size={24} color={colors.blue} />
+                </TouchableOpacity>
 
                 <TextInput />
 
-                <Button title='Camera' />
+                <TouchableOpacity onPress={() => console.log("Pressed!")}>
+                    <Feather name="camera" size={24} color={colors.blue} />
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
