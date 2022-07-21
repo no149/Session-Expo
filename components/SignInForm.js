@@ -10,12 +10,16 @@ const SignInForm = props => {
                 <Input
                     label="Email"
                     icon="mail"
-                    iconPack={Feather} />
+                    iconPack={Feather}
+                    autoCapitalize="none"
+                    keyboardType="email-address" />
 
                 <Input
                     label="Password"
                     icon="lock"
-                    iconPack={Feather} />
+                    iconPack={Feather}
+                    autoCapitalize="none"
+                    secureTextEntry />
                 
                 <SubmitButton
                     title="Sign in"

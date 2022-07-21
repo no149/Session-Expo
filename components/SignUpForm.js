@@ -26,26 +26,32 @@ const SignUpForm = props => {
                     label="First name"
                     icon="user-o"
                     iconPack={FontAwesome}
-                    onInputChanged={inputChangedHandler} />
+                    onInputChanged={inputChangedHandler}
+                    autoCapitalize="none" />
 
                 <Input
                     id="lastName"
                     label="Last name"
                     icon="user-o"
                     iconPack={FontAwesome}
-                    onInputChanged={inputChangedHandler} />
+                    onInputChanged={inputChangedHandler}
+                    autoCapitalize="none" />
 
                 <Input
                     id="email"
                     label="Email"
                     icon="mail"
                     iconPack={Feather}
-                    onInputChanged={inputChangedHandler} />
+                    onInputChanged={inputChangedHandler}
+                    keyboardType="email-address"
+                    autoCapitalize="none" />
 
                 <Input
                     id="password"
                     label="Password"
                     icon="lock"
+                    autoCapitalize="none"
+                    secureTextEntry
                     iconPack={Feather}
                     onInputChanged={inputChangedHandler} />
                 
