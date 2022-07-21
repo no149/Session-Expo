@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Input from '../components/Input';
 import PageContainer from '../components/PageContainer';
+import SubmitButton from '../components/SubmitButton';
 
 const AuthScreen = props => {
     
@@ -29,6 +30,8 @@ const AuthScreen = props => {
                 label="Password"
                 icon="lock"
                 iconPack={Feather} />
+
+            <SubmitButton />
         </PageContainer>
     </SafeAreaView>
 };
