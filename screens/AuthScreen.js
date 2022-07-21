@@ -1,3 +1,4 @@
+import { FontAwesome } from '@expo/vector-icons';
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -9,7 +10,10 @@ const AuthScreen = props => {
     
     return <SafeAreaView style={{ flex: 1}}>
         <PageContainer>
-            <Input label="First name" />
+            <Input
+                label="First name"
+                icon="user-o"
+                iconPack={FontAwesome} />
         </PageContainer>
     </SafeAreaView>
 };

@@ -1,4 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from "react-native"
+import { FontAwesome } from '@expo/vector-icons';
+
 import colors from "../constants/colors";
 
 const Input = props => {
@@ -6,6 +8,12 @@ const Input = props => {
         <Text>{props.label}</Text>
 
         <View style={styles.inputContainer}>
+            {
+                props.icon && <props.iconPack
+                    name={props.icon}
+                    size={props.iconSize || 15 }
+                    style={styles.icon} />
+            }
             <TextInput />
         </View>
     </View>
@@ -21,7 +29,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 15,
         borderRadius: 2,
-        backgroundColor: colors.nearlyWhite
+        backgroundColor: colors.nearlyWhite,
+        flexDirection: 'row'
+    },
+    icon: {
+        marginRight: 10,
+        color: colors.grey
     }
 })
 
