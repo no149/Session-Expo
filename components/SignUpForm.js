@@ -5,27 +5,40 @@ import { Feather, FontAwesome } from '@expo/vector-icons';
 
 const SignUpForm = props => {
 
+    const inputChangedHandler = (inputId, inputValue) => {
+        console.log("InputId: " + inputId)
+        console.log("InputValue: " + inputValue)
+    }
+
     return (
             <>
                 <Input
+                    id="firstName"
                     label="First name"
                     icon="user-o"
-                    iconPack={FontAwesome} />
+                    iconPack={FontAwesome}
+                    onInputChanged={inputChangedHandler} />
 
                 <Input
+                    id="lastName"
                     label="Last name"
                     icon="user-o"
-                    iconPack={FontAwesome} />
+                    iconPack={FontAwesome}
+                    onInputChanged={inputChangedHandler} />
 
                 <Input
+                    id="email"
                     label="Email"
                     icon="mail"
-                    iconPack={Feather} />
+                    iconPack={Feather}
+                    onInputChanged={inputChangedHandler} />
 
                 <Input
+                    id="password"
                     label="Password"
                     icon="lock"
-                    iconPack={Feather} />
+                    iconPack={Feather}
+                    onInputChanged={inputChangedHandler} />
                 
                 <SubmitButton
                     title="Sign up"
