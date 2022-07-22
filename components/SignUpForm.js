@@ -6,7 +6,8 @@ import { Feather, FontAwesome } from '@expo/vector-icons';
 import { validateInput } from '../utils/actions/formActions';
 import { reducer } from '../utils/reducers/formReducer';
 import { signUp } from '../utils/actions/authActions';
-import { Alert } from 'react-native';
+import { ActivityIndicator, Alert } from 'react-native';
+import colors from '../constants/colors';
 
 const initialState = {
     inputValues: {
@@ -27,6 +28,7 @@ const initialState = {
 const SignUpForm = props => {
 
     const [error, setError] = useState();
+    const [isLoading, setIsLoading] = useState(false);
     const [formState, dispatchFormState] = useReducer(reducer, initialState);
 
     const inputChangedHandler = useCallback((inputId, inputValue) => {
@@ -42,6 +44,7 @@ const SignUpForm = props => {
 
     const authHandler = async () => {
         try {
+            setIsLoading(true);
             await signUp(
                 formState.inputValues.firstName,
                 formState.inputValues.lastName,
@@ -51,6 +54,7 @@ const SignUpForm = props => {
             setError(null);
         } catch (error) {
             setError(error.message);
+            setIsLoading(false);
         }
     }
 
@@ -94,11 +98,15 @@ const SignUpForm = props => {
                     onInputChanged={inputChangedHandler}
                     errorText={formState.inputValidities["password"]} />
                 
-                <SubmitButton
-                    title="Sign up"
-                    onPress={authHandler}
-                    style={{ marginTop: 20 }}
-                    disabled={!formState.formIsValid}/>
+                {
+                    isLoading ? 
+                    <ActivityIndicator size={'small'} color={colors.primary} style={{ marginTop: 10 }} /> :
+                    <SubmitButton
+                        title="Sign up"
+                        onPress={authHandler}
+                        style={{ marginTop: 20 }}
+                        disabled={!formState.formIsValid}/>
+                }
             </>
     )
 };
