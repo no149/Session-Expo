@@ -54,12 +54,11 @@ export const signIn = (email, password) => {
             saveDataToStorage(accessToken, uid, expiryDate);
         } catch (error) {
             const errorCode = error.code;
-            console.log(error.code);
 
             let message = "Something went wrong.";
 
-            if (errorCode === "auth/email-already-in-use") {
-                message = "This email is already in use";
+            if (errorCode === "auth/wrong-password" || errorCode === "auth/user-not-found") {
+                message = "The username or password was incorrect";
             }
 
             throw new Error(message);
