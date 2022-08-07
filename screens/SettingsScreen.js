@@ -1,6 +1,7 @@
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import React, { useCallback, useReducer } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 import Input from '../components/Input';
 import PageContainer from '../components/PageContainer';
 import PageTitle from '../components/PageTitle';
@@ -25,7 +26,10 @@ const initialState = {
 
 const SettingsScreen = props => {
 
+    const userData = useSelector(state => state.auth.userData);
+
     const [formState, dispatchFormState] = useReducer(reducer, initialState);
+    console.log(formState.formIsValid);
 
     const inputChangedHandler = useCallback((inputId, inputValue) => {
         const result = validateInput(inputId, inputValue);
@@ -42,7 +46,8 @@ const SettingsScreen = props => {
             iconPack={FontAwesome}
             onInputChanged={inputChangedHandler}
             autoCapitalize="none"
-            errorText={formState.inputValidities["firstName"]} />
+            errorText={formState.inputValidities["firstName"]}
+            initialValue={userData.firstName} />
 
         <Input
             id="lastName"
@@ -51,7 +56,8 @@ const SettingsScreen = props => {
             iconPack={FontAwesome}
             onInputChanged={inputChangedHandler}
             autoCapitalize="none"
-            errorText={formState.inputValidities["lastName"]} />
+            errorText={formState.inputValidities["lastName"]}
+            initialValue={userData.lastName} />
 
         <Input
             id="email"
@@ -61,7 +67,8 @@ const SettingsScreen = props => {
             onInputChanged={inputChangedHandler}
             keyboardType="email-address"
             autoCapitalize="none"
-            errorText={formState.inputValidities["email"]} />
+            errorText={formState.inputValidities["email"]}
+            initialValue={userData.email} />
 
         <Input
             id="about"
@@ -70,7 +77,8 @@ const SettingsScreen = props => {
             iconPack={FontAwesome}
             onInputChanged={inputChangedHandler}
             autoCapitalize="none"
-            errorText={formState.inputValidities["about"]} />
+            errorText={formState.inputValidities["about"]}
+            initialValue={userData.about} />
     </PageContainer>
 };
 
