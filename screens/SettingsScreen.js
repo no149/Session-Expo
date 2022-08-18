@@ -84,7 +84,7 @@ const SettingsScreen = props => {
 
         <ScrollView>
 
-            <ProfileImage />
+            <ProfileImage size={80} />
 
             <Input
                 id="firstName"
