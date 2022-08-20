@@ -12,7 +12,7 @@ export const launchImagePicker = async () => {
     });
 
     if (!result.cancelled) {
-        console.log(result.uri);
+        return result.uri;
     }
 }
 
