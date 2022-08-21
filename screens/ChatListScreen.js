@@ -31,9 +31,13 @@ const ChatListScreen = props => {
         
         const chatUsers = [selectedUser, userData.userId];
 
-        props.navigation.navigate("ChatScreen", { users: chatUsers });
+        const navigationProps = {
+            newChatData: { users: chatUsers }
+        }
 
-    }, [selectedUser])
+        props.navigation.navigate("ChatScreen", navigationProps);
+
+    }, [props.route?.params])
     
     return <View style={styles.container}>
         <Text>Chat list screen</Text>
