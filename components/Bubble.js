@@ -33,6 +33,7 @@ const Bubble = props => {
     const id = useRef(uuid.v4());
 
     let Container = View;
+    let isUserMessage = false;
 
     switch (type) {
         case "system":
@@ -51,11 +52,13 @@ const Bubble = props => {
             bubbleStyle.backgroundColor = '#E7FED6';
             bubbleStyle.maxWidth = '90%';
             Container = TouchableWithoutFeedback;
+            isUserMessage = true;
             break;
         case "theirMessage":
             wrapperStyle.justifyContent = 'flex-start';
             bubbleStyle.maxWidth = '90%';
             Container = TouchableWithoutFeedback;
+            isUserMessage = true;
             break;
     
         default:
@@ -70,6 +73,8 @@ const Bubble = props => {
         }
     }
 
+    const isStarred = isUserMessage && starredMessages[messageId] !== undefined;
+
     return (
         <View style={wrapperStyle}>
             <Container onLongPress={() => menuRef.current.props.ctx.menuActions.openMenu(id.current)} style={{ width: '100%' }}>
@@ -83,7 +88,7 @@ const Bubble = props => {
 
                     <MenuOptions>
                         <MenuItem text='Copy to clipboard' icon={'copy'} onSelect={() => copyToClipboard(text)} />
-                        <MenuItem text='Star message' icon={'star-o'} iconPack={FontAwesome} onSelect={() => starMessage(messageId, chatId, userId)} />
+                        <MenuItem text={`${isStarred ? 'Unstar' : 'Star'} message`} icon={isStarred ? 'star-o' : 'star'} iconPack={FontAwesome} onSelect={() => starMessage(messageId, chatId, userId)} />
                         
                     </MenuOptions>
                 </Menu>
