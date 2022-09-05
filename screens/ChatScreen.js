@@ -21,7 +21,7 @@ import colors from "../constants/colors";
 import { useSelector } from "react-redux";
 import PageContainer from "../components/PageContainer";
 import Bubble from "../components/Bubble";
-import { createChat, sendTextMessage } from "../utils/actions/chatActions";
+import { createChat, sendImage, sendTextMessage } from "../utils/actions/chatActions";
 import ReplyTo from "../components/ReplyTo";
 import { launchImagePicker, uploadImageAsync } from "../utils/imagePickerHelper";
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -114,7 +114,7 @@ const ChatScreen = (props) => {
       const uploadUrl = await uploadImageAsync(tempImageUri, true);
       setIsLoading(false);
 
-      // Send Image
+      await sendImage(chatId, userData.userId, uploadUrl, replyingTo && replyingTo.key)
 
       setTempImageUri("");
     } catch (error) {
