@@ -112,15 +112,14 @@ const ChatScreen = (props) => {
 
     try {
       const uploadUrl = await uploadImageAsync(tempImageUri, true);
+      setIsLoading(false);
 
       // Send Image
 
       setTempImageUri("");
     } catch (error) {
       console.log(error);
-    }
-    finally {
-      setIsLoading(false);
+      
     }
   }, [isLoading, tempImageUri])
 
