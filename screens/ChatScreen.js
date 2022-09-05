@@ -111,19 +111,27 @@ const ChatScreen = (props) => {
     setIsLoading(true);
 
     try {
+
+      let id = chatId;
+      if (!id) {
+        // No chat Id. Create the chat
+        id = await createChat(userData.userId, props.route.params.newChatData);
+        setChatId(id);
+      }
+
       const uploadUrl = await uploadImageAsync(tempImageUri, true);
       setIsLoading(false);
 
-      await sendImage(chatId, userData.userId, uploadUrl, replyingTo && replyingTo.key)
+      await sendImage(id, userData.userId, uploadUrl, replyingTo && replyingTo.key)
       setReplyingTo(null);
       
-      setTempImageUri("");
+      setTimeout(() => setTempImageUri(""), 500);
       
     } catch (error) {
       console.log(error);
       
     }
-  }, [isLoading, tempImageUri])
+  }, [isLoading, tempImageUri, chatId])
 
   return (
     <SafeAreaView edges={["right", "left", "bottom"]} style={styles.container}>
