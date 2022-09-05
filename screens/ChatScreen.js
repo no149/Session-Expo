@@ -26,6 +26,7 @@ const ChatScreen = (props) => {
   const [messageText, setMessageText] = useState("");
   const [chatId, setChatId] = useState(props.route?.params?.chatId);
   const [errorBannerText, setErrorBannerText] = useState("");
+  const [replyingTo, setReplyingTo] = useState();
 
   const userData = useSelector(state => state.auth.userData);
   const storedUsers = useSelector(state => state.users.storedUsers);
@@ -125,6 +126,7 @@ const ChatScreen = (props) => {
                             userId={userData.userId}
                             chatId={chatId}
                             date={message.sentAt}
+                            setReply={() => setReplyingTo(message)}
                           />
                 }}
               />
@@ -132,6 +134,12 @@ const ChatScreen = (props) => {
 
 
           </PageContainer>
+
+          {
+            replyingTo &&
+            <Text>Replying to</Text>
+          }
+
         </ImageBackground>
 
         <View style={styles.inputContainer}>
