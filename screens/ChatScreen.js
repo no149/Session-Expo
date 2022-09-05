@@ -115,8 +115,10 @@ const ChatScreen = (props) => {
       setIsLoading(false);
 
       await sendImage(chatId, userData.userId, uploadUrl, replyingTo && replyingTo.key)
-
+      setReplyingTo(null);
+      
       setTempImageUri("");
+      
     } catch (error) {
       console.log(error);
       
@@ -164,6 +166,7 @@ const ChatScreen = (props) => {
                             date={message.sentAt}
                             setReply={() => setReplyingTo(message)}
                             replyingTo={message.replyTo && chatMessages.find(i => i.key === message.replyTo)}
+                            imageUrl={message.imageUrl}
                           />
                 }}
               />
