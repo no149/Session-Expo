@@ -23,7 +23,7 @@ import PageContainer from "../components/PageContainer";
 import Bubble from "../components/Bubble";
 import { createChat, sendImage, sendTextMessage } from "../utils/actions/chatActions";
 import ReplyTo from "../components/ReplyTo";
-import { launchImagePicker, uploadImageAsync } from "../utils/imagePickerHelper";
+import { launchImagePicker, openCamera, uploadImageAsync } from "../utils/imagePickerHelper";
 import AwesomeAlert from 'react-native-awesome-alerts';
 
 const ChatScreen = (props) => {
@@ -99,6 +99,17 @@ const ChatScreen = (props) => {
   const pickImage = useCallback(async () => {
     try {
       const tempUri = await launchImagePicker();
+      if (!tempUri) return;
+
+      setTempImageUri(tempUri);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [tempImageUri]);
+
+  const takePhoto = useCallback(async () => {
+    try {
+      const tempUri = await openCamera();
       if (!tempUri) return;
 
       setTempImageUri(tempUri);
@@ -212,7 +223,7 @@ const ChatScreen = (props) => {
           {messageText === "" && (
             <TouchableOpacity
               style={styles.mediaButton}
-              onPress={() => console.log("Pressed!")}
+              onPress={takePhoto}
             >
               <Feather name="camera" size={24} color={colors.blue} />
             </TouchableOpacity>
