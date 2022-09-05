@@ -129,6 +129,7 @@ const ChatScreen = (props) => {
                             chatId={chatId}
                             date={message.sentAt}
                             setReply={() => setReplyingTo(message)}
+                            replyingTo={message.replyTo && chatMessages.find(i => i.key === message.replyTo)}
                           />
                 }}
               />
