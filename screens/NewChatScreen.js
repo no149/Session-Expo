@@ -19,10 +19,12 @@ const NewChatScreen = props => {
     const [users, setUsers] = useState();
     const [noResultsFound, setNoResultsFound] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
+    const [chatName, setChatName] = useState("");
 
     const userData = useSelector(state => state.auth.userData);
 
     const isGroupChat = props.route.params && props.route.params.isGroupChat;
+    const isGroupChatDisabled = chatName === "";
 
     useEffect(() => {
         props.navigation.setOptions({
@@ -33,9 +35,21 @@ const NewChatScreen = props => {
                         onPress={() => props.navigation.goBack()}/>
                 </HeaderButtons>
             },
+            headerRight: () => {
+                return <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                    {
+                        isGroupChat &&
+                        <Item
+                            title="Create"
+                            disabled={isGroupChatDisabled}
+                            color={isGroupChatDisabled ? colors.lightGrey : undefined}
+                            onPress={() => {}}/>
+                    }
+                </HeaderButtons>
+            },
             headerTitle: isGroupChat ? "Add participants" : "New chat"
         })
-    }, []);
+    }, [chatName]);
 
     useEffect(() => {
         const delaySearch = setTimeout(async () => {
@@ -83,6 +97,7 @@ const NewChatScreen = props => {
                             placeholder="Enter a name for your chat"
                             autoCorrect={false}
                             autoComplete={false}
+                            onChangeText={text => setChatName(text)}
                         />
                     </View>
                 </View>
