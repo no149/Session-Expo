@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, ActivityIndicator, FlatList } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/CustomHeaderButton';
@@ -25,6 +25,8 @@ const NewChatScreen = props => {
 
     const userData = useSelector(state => state.auth.userData);
     const storedUsers = useSelector(state => state.users.storedUsers);
+
+    const selectedUsersFlatList = useRef();
 
     const isGroupChat = props.route.params && props.route.params.isGroupChat;
     const isGroupChatDisabled = selectedUsers.length === 0 || chatName === "";
@@ -123,6 +125,8 @@ const NewChatScreen = props => {
                             horizontal={true}
                             keyExtractor={item => item}
                             contentContainerStyle={{ alignItems: 'center' }}
+                            ref={ref => selectedUsersFlatList.current = ref}
+                            onContentSizeChange={() => selectedUsersFlatList.current.scrollToEnd()}
                             renderItem={itemData => {
                                 const userId = itemData.item;
                                 const userData = storedUsers[userId];
