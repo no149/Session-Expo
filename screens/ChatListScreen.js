@@ -41,19 +41,33 @@ const ChatListScreen = props => {
         if (!selectedUser && !selectedUserList) {
             return;
         }
-        
-        const chatUsers = selectedUserList || [selectedUser];
-        if (!chatUsers.includes(userData.userId)){
-            chatUsers.push(userData.userId);
+
+        let chatData;
+        let navigationProps;
+
+        if (selectedUser) {
+            chatData = userChats.find(cd => !cd.isGroupChat && cd.users.includes(selectedUser))
         }
 
-        const navigationProps = {
-            newChatData: {
-                users: chatUsers,
-                isGroupChat: selectedUserList !== undefined,
-                chatName
+        if (chatData) {
+            navigationProps = { chatId: chatData.key }
+        }
+        else {
+            const chatUsers = selectedUserList || [selectedUser];
+            if (!chatUsers.includes(userData.userId)){
+                chatUsers.push(userData.userId);
+            }
+
+            navigationProps = {
+                newChatData: {
+                    users: chatUsers,
+                    isGroupChat: selectedUserList !== undefined,
+                    chatName
+                }
             }
         }
+        
+        
 
         props.navigation.navigate("ChatScreen", navigationProps);
 

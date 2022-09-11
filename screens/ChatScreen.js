@@ -36,7 +36,7 @@ const ChatScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const flatList = useRef();
-console.log(chatUsers)
+
   const userData = useSelector(state => state.auth.userData);
   const storedUsers = useSelector(state => state.users.storedUsers);
   const storedChats = useSelector(state => state.chats.chatsData);
