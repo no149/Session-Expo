@@ -148,10 +148,7 @@ const ChatScreen = (props) => {
 
   return (
     <SafeAreaView edges={["right", "left", "bottom"]} style={styles.container}>
-      <KeyboardAvoidingView
-        style={styles.screen}
-        behavior={ Platform.OS === "ios" ? "padding" : undefined}
-        keyboardVerticalOffset={100}>
+      
         <ImageBackground
           source={backgroundImage}
           style={styles.backgroundImage}
@@ -274,7 +271,6 @@ const ChatScreen = (props) => {
 
 
         </View>
-      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
