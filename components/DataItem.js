@@ -25,7 +25,7 @@ const DataItem = props => {
                 {
                     icon &&
                     <View style={styles.leftIconContainer}>
-                        <AntDesign name={icon} size={20} color={colors.primary} />
+                        <AntDesign name={icon} size={20} color={colors.blue} />
                     </View>
                 }
 
@@ -34,7 +34,7 @@ const DataItem = props => {
 
                     <Text
                         numberOfLines={1}
-                        style={styles.title}>
+                        style={{ ...styles.title, ...{ color: type === "button" ? colors.blue : colors.textColor } }}>
                         {title}
                     </Text>
 
