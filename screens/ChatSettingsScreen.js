@@ -1,6 +1,7 @@
 import React, { useCallback, useReducer, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { useSelector } from 'react-redux';
+import DataItem from '../components/DataItem';
 import Input from '../components/Input';
 import PageContainer from '../components/PageContainer';
 import PageTitle from '../components/PageTitle';
@@ -80,6 +81,18 @@ const ChatSettingsScreen = props => {
                 errorText={formState.inputValidities["chatName"]}
             />
 
+
+            <View style={styles.sectionContainer}>
+                <Text style={styles.heading}>{chatData.users.length} Participants</Text>
+
+                <DataItem
+                    title="Add users"
+                    icon="plus"
+                />
+            </View>
+
+
+
             { showSuccessMessage && <Text>Saved!</Text> }
 
             {
@@ -106,6 +119,16 @@ const styles = StyleSheet.create({
     scrollView: {
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    sectionContainer: {
+        width: '100%',
+        marginTop: 10
+    },
+    heading: {
+        marginVertical: 8,
+        color: colors.textColor,
+        fontFamily: 'bold',
+        letterSpacing: 0.3
     }
 })
 
