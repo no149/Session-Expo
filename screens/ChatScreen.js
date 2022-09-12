@@ -69,9 +69,11 @@ const ChatScreen = (props) => {
     return otherUserData && `${otherUserData.firstName} ${otherUserData.lastName}`;
   }
 
+  const title = chatData.chatName ?? getChatTitleFromName();
+
   useEffect(() => {
     props.navigation.setOptions({
-      headerTitle: getChatTitleFromName()
+      headerTitle: title
     })
     setChatUsers(chatData.users)
   }, [chatUsers])
@@ -86,7 +88,7 @@ const ChatScreen = (props) => {
         setChatId(id);
       }
 
-      await sendTextMessage(chatId, userData.userId, messageText, replyingTo && replyingTo.key);
+      await sendTextMessage(id, userData.userId, messageText, replyingTo && replyingTo.key);
 
       setMessageText("");
       setReplyingTo(null);
@@ -177,6 +179,8 @@ const ChatScreen = (props) => {
 
                   const messageType = isOwnMessage ? "myMessage" : "theirMessage";
 
+                  const sender = message.sentBy && storedUsers[message.sentBy];
+                  const name = sender && `${sender.firstName} ${sender.lastName}`;
 
                   return <Bubble
                             type={messageType}
@@ -185,6 +189,7 @@ const ChatScreen = (props) => {
                             userId={userData.userId}
                             chatId={chatId}
                             date={message.sentAt}
+                            name={!chatData.isGroupChat || isOwnMessage ? undefined : name}
                             setReply={() => setReplyingTo(message)}
                             replyingTo={message.replyTo && chatMessages.find(i => i.key === message.replyTo)}
                             imageUrl={message.imageUrl}
