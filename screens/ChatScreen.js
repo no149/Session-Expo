@@ -104,7 +104,7 @@ const ChatScreen = (props) => {
         setChatId(id);
       }
 
-      await sendTextMessage(id, userData.userId, messageText, replyingTo && replyingTo.key);
+      await sendTextMessage(id, userData, messageText, replyingTo && replyingTo.key, chatUsers);
 
       setMessageText("");
       setReplyingTo(null);
