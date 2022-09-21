@@ -1,7 +1,8 @@
 import { Feather, FontAwesome } from '@expo/vector-icons';
-import React, { useCallback, useReducer, useState } from 'react';
+import React, { useCallback, useMemo, useReducer, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import DataItem from '../components/DataItem';
 import Input from '../components/Input';
 import PageContainer from '../components/PageContainer';
 import PageTitle from '../components/PageTitle';
@@ -20,6 +21,20 @@ const SettingsScreen = props => {
     const [isLoading, setIsLoading] = useState(false);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const userData = useSelector(state => state.auth.userData);
+    const starredMessages = useSelector(state => state.messages.starredMessages ?? {});
+
+    const sortedStarredMessages = useMemo(() => {
+        let result = [];
+
+        const chats = Object.values(starredMessages);
+
+        chats.forEach(chat => {
+            const chatMessages = Object.values(chat);
+            result = result.concat(chatMessages);
+        })
+
+        return result;
+    }, [starredMessages]);
     
     const firstName = userData.firstName || "";
     const lastName = userData.lastName || "";
@@ -147,6 +162,12 @@ const SettingsScreen = props => {
             }
             </View>
 
+            <DataItem
+                type={"link"}
+                title="Starred messages"
+                hideImage={true}
+                onPress={() => props.navigation.navigate("DataList", { title: "Starred messages", data: sortedStarredMessages, type: "messages" })}
+            />
 
             <SubmitButton
                 title="Logout"
