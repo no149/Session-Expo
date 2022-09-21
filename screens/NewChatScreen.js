@@ -28,6 +28,7 @@ const NewChatScreen = props => {
 
     const selectedUsersFlatList = useRef();
 
+    const existingUsers = props.route.params && props.route.params.existingUsers;
     const isGroupChat = props.route.params && props.route.params.isGroupChat;
     const isGroupChatDisabled = selectedUsers.length === 0 || chatName === "";
 
@@ -173,6 +174,10 @@ const NewChatScreen = props => {
                 renderItem={(itemData) => {
                     const userId = itemData.item;
                     const userData = users[userId];
+
+                    if (existingUsers && existingUsers.includes(userId)) {
+                        return;
+                    }
 
                     return <DataItem
                                 title={`${userData.firstName} ${userData.lastName}`}
