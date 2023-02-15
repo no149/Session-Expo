@@ -2,5 +2,7 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true
-  }
+  },
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": false
 }
